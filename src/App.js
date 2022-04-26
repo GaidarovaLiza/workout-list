@@ -1,16 +1,26 @@
 import "./App.css";
 import { useState } from "react";
+import AddForm from './components/AddForm';
+import WorkoutsTable from './components/WorkoutsTable';
+import { sortByDate } from "./utils";
 
-import AddWorkouts from './components/AddWorkouts';
-import WorkoutsForm from './components/WorkoutsForm';
-
-function App() {
-  const workoutData = [];
-  const [workouts, setWorkouts] = useState(workoutData);
+export default function App() {
+  const [workouts, setWorkouts] = useState([]);
 
   const addWorkout = (workout) => {
     workout.id = workouts.length + 1;
-    setWorkouts([...workouts, workout]);
+    setWorkouts([...workouts, workout].sort(sortByDate));
+
+    const dateIndex = workouts.findIndex(({ date }) => workout.date === date);
+    const existedDate = workouts[dateIndex];
+    const newWorkout = {
+      ...existedDate,
+      distance: parseInt(existedDate.distance) + parseInt(workout.distance)
+    };
+    const newWorkouts = [...workouts];
+    newWorkouts[dateIndex] = newWorkout;
+
+    setWorkouts(newWorkouts);
   };
 
   const deleteWorkout = (id) => {
@@ -19,10 +29,9 @@ function App() {
 
   return (
     <div className="wrapper">
-      <AddWorkouts addWorkout={addWorkout} />
-      <WorkoutsForm workouts={workouts} deleteWorkout={deleteWorkout} />
+      <AddForm addWorkout={addWorkout} />
+      <WorkoutsTable workouts={workouts} deleteWorkout={deleteWorkout} />
     </div>
-  );
-}
+  )
+};
 
-export default App;

@@ -5,7 +5,7 @@
 	height: auto;
 	border-radius: 20px;
 	padding: 20px;
-font-size: 23px;
+	font-size: 23px;
 }
 
 .wrapper{
@@ -44,4 +44,14 @@ border-radius: 10px;
 }
 .no-workout{
 	opacity: 0.6;
+}
+
+.workout-list-row{
+	display:flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.button-delete{
+	cursor: pointer;
 }
