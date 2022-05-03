@@ -19,7 +19,7 @@ export default function App() {
     };
     const newWorkouts = [...workouts];
     newWorkouts[dateIndex] = newWorkout;
-
+ 
     setWorkouts(newWorkouts);
   };
 

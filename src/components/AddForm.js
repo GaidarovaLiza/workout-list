@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { isValidDate } from "../utils";
+import { isValidDate, isValidDistance } from "../utils";
 
 export default function AddForm({ addWorkout }) {
   const initialFormState = { id: null, date: "", distance: "" };
@@ -13,14 +13,19 @@ export default function AddForm({ addWorkout }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     if (!workout.date || !workout.distance) {
       return alert("Заполните все поля!");
+    } else if (isValidDate(workout.date) === false) {
+      return alert("Введите дату в правильном формате! Пример: 12.12.2012");
+    } else if (isValidDistance(workout.distance) === false) {
+      return alert("Введите дистанцию в правильном формате! Пример: 5 км");
+    } else {
+      setWorkout(initialFormState);
+      addWorkout(workout);
+      return;
     }
-    return isValidDate(workout.date) === false
-      ? alert("Введите дату в правильном формате! Пример: 12.12.2012")
-      : setWorkout(initialFormState), addWorkout(workout)
   };
-
 
   return (
     <form onSubmit={handleSubmit}>

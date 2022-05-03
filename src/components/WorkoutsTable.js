@@ -3,7 +3,7 @@ import React from "react";
 export default function WorkoutsTable({ deleteWorkout, workouts }) {
   return (
     <div className="workout-list">
-      {workouts.length > 0 || !Array.isArray(workouts)
+      {Array.isArray(workouts) && workouts.length > 0
         ? workouts.map((item) => (
           <div className="workout-list-row" key={item.id}>
             <span>{item.date}</span>
@@ -14,7 +14,6 @@ export default function WorkoutsTable({ deleteWorkout, workouts }) {
                 ✘
               </p>
             </div>
-
           </div>
         ))
         : <div>
