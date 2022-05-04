@@ -1,3 +1,4 @@
+import { regexDate, regexDistance } from "./constans";
 
 export const sortByDate = (a, b) => {
 	if (a.date < b.date) {
@@ -10,15 +11,11 @@ export const sortByDate = (a, b) => {
 }
 
 export const isValidDate = (date) => {
-	let regex = new RegExp(
-		"([0-9]{4}[.](0[1-9]|1[0-2])[.]([0-2]{1}[0-9]{1}|3[0-1]{1})|([0-2]{1}[0-9]{1}|3[0-1]{1})[.](0[1-9]|1[0-2])[.][0-9]{4})"
-	);
-	let dateOk = regex.test(date);
+	const dateOk = regexDate.test(date);
 	return dateOk
 }
 
 export const isValidDistance = (distance) => {
-	let regex = new RegExp(/^(0|-?[1-9]\d{0,5})$/);
-	let distanceOk = regex.test(distance);
+	const distanceOk = regexDistance.test(distance);
 	return distanceOk
 }

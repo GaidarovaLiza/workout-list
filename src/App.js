@@ -9,7 +9,7 @@ export default function App() {
 
   const addWorkout = (workout) => {
     workout.id = workouts.length + 1;
-    setWorkouts([...workouts, workout].sort(sortByDate));
+    setWorkouts((prevState) => ([...prevState, workout].sort(sortByDate)));
 
     const dateIndex = workouts.findIndex(({ date }) => workout.date === date);
     const existedDate = workouts[dateIndex];
@@ -19,8 +19,8 @@ export default function App() {
     };
     const newWorkouts = [...workouts];
     newWorkouts[dateIndex] = newWorkout;
- 
-    setWorkouts(newWorkouts);
+
+    setWorkouts((prevState) => newWorkouts);
   };
 
   const deleteWorkout = (id) => {
