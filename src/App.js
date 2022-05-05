@@ -6,11 +6,13 @@ import { sortByDate } from "./utils";
 
 export default function App() {
   const [workouts, setWorkouts] = useState([]);
-
+  
   const addWorkout = (workout) => {
     workout.id = workouts.length + 1;
-    setWorkouts((prevState) => ([...prevState, workout].sort(sortByDate)));
+    setWorkouts([...workouts, workout].sort(sortByDate));
+  };
 
+  const updateDistance = (workout) => {
     const dateIndex = workouts.findIndex(({ date }) => workout.date === date);
     const existedDate = workouts[dateIndex];
     const newWorkout = {
@@ -19,9 +21,8 @@ export default function App() {
     };
     const newWorkouts = [...workouts];
     newWorkouts[dateIndex] = newWorkout;
-
-    setWorkouts((prevState) => newWorkouts);
-  };
+    setWorkouts(newWorkouts);
+  }
 
   const deleteWorkout = (id) => {
     setWorkouts(workouts.filter((i) => i.id !== id));
@@ -29,9 +30,8 @@ export default function App() {
 
   return (
     <div className="wrapper">
-      <AddForm addWorkout={addWorkout} />
+      <AddForm addWorkout={addWorkout} updateDistance={updateDistance} />
       <WorkoutsTable workouts={workouts} deleteWorkout={deleteWorkout} />
     </div>
   )
 };
-

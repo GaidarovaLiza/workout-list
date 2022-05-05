@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { isValidDate, isValidDistance } from "../utils";
 
-export default function AddForm({ addWorkout }) {
+export default function AddForm({ addWorkout, updateDistance }) {
   const initialFormState = { id: null, date: "", distance: "" };
   const [workout, setWorkout] = useState(initialFormState);
 
@@ -23,6 +23,7 @@ export default function AddForm({ addWorkout }) {
     } else {
       setWorkout(initialFormState);
       addWorkout(workout);
+      updateDistance(workout)
       return;
     }
   };
