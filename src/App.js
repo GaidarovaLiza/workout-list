@@ -12,6 +12,10 @@ export default function App() {
     setWorkouts([...workouts, workout].sort(sortByDate));
   };
 
+
+
+
+  
   const updateDistance = (workout) => {
     const dateIndex = workouts.findIndex(({ date }) => workout.date === date);
     const existedDate = workouts[dateIndex];
